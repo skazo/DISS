@@ -18,6 +18,7 @@ public class GUI {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Haloo pokus");
+        System.out.println("Druhy pokus");
     }
     
 }
