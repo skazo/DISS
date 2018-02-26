@@ -19,6 +19,7 @@ public class GUI {
         // TODO code application logic here
         System.out.println("Haloo pokus");
         System.out.println("Druhy pokus");
+        System.out.println("Skuskagitu");
     }
     
 }
