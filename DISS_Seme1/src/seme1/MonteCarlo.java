@@ -5,7 +5,6 @@
  */
 package seme1;
 
-import java.awt.image.ReplicateScaleFilter;
 import java.util.Observable;
 
 /**
