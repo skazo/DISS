@@ -18,6 +18,10 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
       // tu bude GUIko 
+     //Hra hra = new Hra(10,true);
+     Jadro jadro = new Jadro();
+        jadro.simuluj();
+      
     }
     
 }

@@ -9,59 +9,30 @@ package seme1;
  *
  * @author Michal
  */
-public class Jadro {
+public class Jadro extends MonteCarlo {
 
-    private int pocetReplikacii;
-    private int pocetDveri;
-    private double pravdepodobnostA;
-    private double pravdepodobnostB;
-    private double cena;
+    private Hra hra;
+    private Statistika statistika;
+
+    public Jadro() {
+        super();
+        this.hra = new Hra(3, true);
+    }
+
     
-    public Jadro(){
-        
-        
-        
-        
+    // 
+    @Override
+    protected void replikacia() {
+       hra.zacniHru();
+       statistika.vyratajStatistiku();
+       hra.vymazDvere();
     }
 
-    public double getCena() {
-        return cena;
+    public Hra getHra() {
+        return hra;
     }
 
-    public void setCena(double cena) {
-        this.cena = cena;
+    public void setHra(Hra hra) {
+        this.hra = hra;
     }
-
-    public double getPravdepodobnost1() {
-        return pravdepodobnostA;
-    }
-
-    public void setPravdepodobnost1(double pravdepodobnostA) {
-        this.pravdepodobnostA = pravdepodobnostA;
-    }
-
-    public double getPravdepodobnostB() {
-        return pravdepodobnostB;
-    }
-
-    public void setPravdepodobnost2(double pravdepodobnostB) {
-        this.pravdepodobnostB = pravdepodobnostB;
-    }
-
-    public int getPocetDveri() {
-        return pocetDveri;
-    }
-
-    public void setPocetDveri(int pocetDveri) {
-        this.pocetDveri = pocetDveri;
-    }
-
-    public int getPocetReplikacii() {
-        return pocetReplikacii;
-    }
-
-    public void setPocetReplikacii(int pocetReplikacii) {
-        this.pocetReplikacii = pocetReplikacii;
-    }
-
 }
