@@ -55,8 +55,8 @@ public class Hra {
     // true
     public int urobStrategiuA() {
         int vyhral = 20;
-        if (true) {
-
+        if (generatorAuto==generatorHrac) {
+            vyhral = 1;    
         } else {
             vyhral = 0;
         }
