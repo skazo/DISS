@@ -5,10 +5,19 @@
  */
 package seme1;
 
+import java.util.Observable;
+
 /**
  *
  * @author Michal
  */
-public class MonteCarlo {
+public abstract class MonteCarlo extends Observable implements Runnable{
+    
+    private int pocetReplikacii;
+    
+    
+    public MonteCarlo(){
+        super();
+    }
     
 }
