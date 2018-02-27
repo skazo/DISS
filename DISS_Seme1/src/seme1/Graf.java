@@ -10,5 +10,5 @@ package seme1;
  * @author Michal
  */
 public class Graf {
-    
+    // toto bude brat udaje zo simulacie a robit data pre grafy
 }

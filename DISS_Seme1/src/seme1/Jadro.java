@@ -19,6 +19,9 @@ public class Jadro {
     
     public Jadro(){
         
+        
+        
+        
     }
 
     public double getCena() {
