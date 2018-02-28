@@ -20,11 +20,15 @@ public class Hra {
     private Random generatorHrac; // generuje nahodne cislo aby urcil hracov vyber
     private Random generatorModerator; // generuje nahodne cislo aby urcil vyber moderatora
     private boolean strategia; 
+    private int auto;
+    private int hrac;
             
     public Hra(int pocetDveri, boolean strategia) {
         this.pocetDveri = pocetDveri;
         this.dvere = new boolean[pocetDveri];
         this.strategia = strategia;
+        this.auto = -1;
+        this.hrac = -1;
         generujNasady();
       
     }
@@ -33,7 +37,7 @@ public class Hra {
         Random rand = new Random();
         generatorAuto = new Random(rand.nextInt());
         generatorHrac = new Random(rand.nextInt());
-        
+        generatorModerator = new Random(rand.nextInt());
     }
 
     public void nastavAutoZviera() {
@@ -42,7 +46,8 @@ public class Hra {
             //System.out.println("cislo dveri: " + i);
             dvere[i]= false;    
         }
-        dvere[generatorAuto.nextInt(pocetDveri)]=true;
+        auto=generatorAuto.nextInt(pocetDveri);
+        this.dvere[auto]=true;
        
         for (int i = 0; i < pocetDveri; i++) {
             System.out.println("obsah dveri: "+dvere[i]);
@@ -55,7 +60,9 @@ public class Hra {
     // true
     public int urobStrategiuA() {
         int vyhral = 20;
-        if (generatorAuto==generatorHrac) {
+        hrac = generatorHrac.nextInt(pocetDveri);
+        
+        if (auto==hrac) {
             vyhral = 1;    
         } else {
             vyhral = 0;
@@ -67,12 +74,23 @@ public class Hra {
     // false
     public int urobStrategiuB() {
         int vyhral = 20;
+        hrac = generatorHrac.nextInt(pocetDveri-2);
+        int moderator = generatorModerator.nextInt(pocetDveri);
+        
         if (true) {
 
         } else {
             vyhral = 0;
         }
         return vyhral;
+    }
+    
+    public int otvorDvereModerator(){
+        int cisloDveri= -1;
+        int moderator = generatorModerator.nextInt(pocetDveri-2);
+        
+        
+        return cisloDveri;
     }
     
     public void zacniHru(){
