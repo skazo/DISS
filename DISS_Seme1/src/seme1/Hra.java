@@ -74,8 +74,8 @@ public class Hra {
     // false
     public int urobStrategiuB() {
         int vyhral = 20;
-        hrac = generatorHrac.nextInt(pocetDveri-2);
-        int moderator = generatorModerator.nextInt(pocetDveri);
+        hrac = generatorHrac.nextInt(pocetDveri);
+        int moderator = generatorModerator.nextInt(pocetDveri-2);
         
         if (true) {
 
@@ -88,7 +88,7 @@ public class Hra {
     public int otvorDvereModerator(){
         int cisloDveri= -1;
         int moderator = generatorModerator.nextInt(pocetDveri-2);
-        
+        cisloDveri = moderator;
         
         return cisloDveri;
     }
