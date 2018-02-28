@@ -28,6 +28,26 @@ public class Jadro extends MonteCarlo {
        hra.vymazDvere();
     }
 
+    @Override
+    public void predReplikaciou() {
+
+    }
+
+    @Override
+    public void poReplikacii() {
+
+    }
+
+    @Override
+    public void predSimulaciou() {
+
+    }
+
+    @Override
+    public void poSimulacii() {
+
+    }
+    
     public Hra getHra() {
         return hra;
     }
@@ -35,4 +55,6 @@ public class Jadro extends MonteCarlo {
     public void setHra(Hra hra) {
         this.hra = hra;
     }
+    
+    
 }
