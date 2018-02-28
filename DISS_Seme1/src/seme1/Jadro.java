@@ -30,7 +30,7 @@ public class Jadro extends MonteCarlo {
 
     @Override
     public void predReplikaciou() {
-
+            //dorobit
     }
 
     @Override
