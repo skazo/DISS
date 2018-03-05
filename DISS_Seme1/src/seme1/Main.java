@@ -19,9 +19,9 @@ public class Main {
         // TODO code application logic here
       // tu bude GUIko 
      //Hra hra = new Hra(10,true);
-     Jadro jadro = new Jadro();
+     Jadro jadro = new Jadro(1000000);
         jadro.simuluj();
-      
+       
     }
     
 }

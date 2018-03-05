@@ -13,34 +13,32 @@ public class Jadro extends MonteCarlo {
 
     private Hra hra;
     private Statistika statistika;
+    private int pocetReplikacii;
 
-    public Jadro() {
-        super();
-        this.hra = new Hra(3, true);
+    public Jadro(int pocetReplikacii) {
+        super(pocetReplikacii);
+        this.hra = new Hra(3);
     }
-
     
     // 
     @Override
-    protected void replikacia() {
-       hra.zacniHru();
-       statistika.vyratajStatistiku();
-       hra.vymazDvere();
+    public void replikacia() {
+       hra.urobHru();
     }
 
     @Override
     public void predReplikaciou() {
-            //dorobit
+        
     }
 
     @Override
     public void poReplikacii() {
-
+            
     }
 
     @Override
     public void predSimulaciou() {
-
+        
     }
 
     @Override
@@ -56,5 +54,12 @@ public class Jadro extends MonteCarlo {
         this.hra = hra;
     }
     
+    public int getPocetReplikacii() {
+        return pocetReplikacii;
+    }
+
+    public void setPocetReplikacii(int pocetReplikacii) {
+        this.pocetReplikacii = pocetReplikacii;
+    }
     
 }

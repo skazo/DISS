@@ -23,7 +23,7 @@ public class Hra {
     private int auto;
     private int hrac;
     private int moderator;
-    private int pomocna;
+    private int aktualneCisloHry;
 
     public Hra(int pocetDveri) {
         this.pocetDveri = pocetDveri;
@@ -31,7 +31,7 @@ public class Hra {
         this.auto = -1;
         this.hrac = -1;
         this.moderator = -1;
-        this.pomocna = 1;
+        this.aktualneCisloHry = 1;
         generujNasady();
 
     }
@@ -47,7 +47,7 @@ public class Hra {
 
     // 2
     public void nastavAutoZviera() {
-        System.out.println("cislo hry: " + pomocna);
+        System.out.println("cislo hry: " + aktualneCisloHry);
         for (int i = 0; i < pocetDveri; i++) {
             //System.out.println("cislo dveri: " + i);
             dvere[i] = false;
@@ -60,7 +60,7 @@ public class Hra {
 //        for (int i = 0; i < pocetDveri; i++) {
 //            System.out.println("obsah dveri " + i + " : " + dvere[i]);
 //        }
-        pomocna++;
+        
     }
 
     //3  
@@ -154,7 +154,7 @@ public class Hra {
 
         System.out.println("strategiaA: CisloA: " + auto + " CisloH: " + hrac + " CisloM: " + moderator + " Vyhral?: " + vyhral);
         if (moderator == hrac) {
-            //   System.out.println("--------------------------WARNIIIIIIIIIIIIIIIIIIIIIIIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGG--------------------------------");
+//               System.out.println("--------------------------WARNIIIIIIIIIIIIIIIIIIIIIIIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGG--------------------------------");
 
         }
         return vyhral;
@@ -179,6 +179,9 @@ public class Hra {
         otvorVolneDvereModerator();
         urobStrategiuA();
         urobStrategiuB();
+        aktualneCisloHry=getAktualneCisloHry();
+        aktualneCisloHry++;
+        setAktualneCisloHry(aktualneCisloHry);
     }
 
     public void vymazDvere() {
@@ -229,4 +232,13 @@ public class Hra {
         this.generatorModerator = generatorModerator;
     }
 
+    public int getAktualneCisloHry() {
+        return aktualneCisloHry;
+    }
+
+    public void setAktualneCisloHry(int aktualneCisloHry) {
+        this.aktualneCisloHry = aktualneCisloHry;
+    }
+    
+    
 }
