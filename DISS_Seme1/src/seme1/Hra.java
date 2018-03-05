@@ -18,6 +18,7 @@ public class Hra {
     private boolean[] dvere;
     private Random generatorAuto;  // generuje nahodne cislo aby urcil poziciu auta
     private Random generatorHrac; // generuje nahodne cislo aby urcil hracov vyber
+    private Random generatorHrac2;
     private Random generatorModerator; // generuje nahodne cislo aby urcil vyber moderatora
     private int auto;
     private int hrac;
@@ -30,125 +31,156 @@ public class Hra {
         this.auto = -1;
         this.hrac = -1;
         this.moderator = -1;
-        this.pomocna = 1;    
+        this.pomocna = 1;
+        generujNasady();
+
     }
 
+    // 1
     public void generujNasady() {
         Random rand = new Random();
         generatorAuto = new Random(rand.nextInt());
         generatorHrac = new Random(rand.nextInt());
+        generatorHrac2 = new Random(rand.nextInt());
         generatorModerator = new Random(rand.nextInt());
     }
 
+    // 2
     public void nastavAutoZviera() {
-        System.out.println("cislo hry"+pomocna);
+        System.out.println("cislo hry: " + pomocna);
         for (int i = 0; i < pocetDveri; i++) {
             //System.out.println("cislo dveri: " + i);
             dvere[i] = false;
-            
+
         }
         auto = generatorAuto.nextInt(pocetDveri);
-        this.dvere[auto] = true;
-        
-        
-        for (int i = 0; i < pocetDveri; i++) {
-            System.out.println("obsah dveri: "+dvere[i]);
-        }
+        dvere[auto] = true;
+        hrac = generatorHrac.nextInt(pocetDveri);
+
+//        for (int i = 0; i < pocetDveri; i++) {
+//            System.out.println("obsah dveri " + i + " : " + dvere[i]);
+//        }
         pomocna++;
     }
 
-    public void urobHru() {
-        generujNasady();
-        nastavAutoZviera();
-        hrac = generatorHrac.nextInt(pocetDveri);
-        otvorVolneDvereModerator();
-        urobStrategiuA();
-        urobStrategiuB();
-    }
-
-    // ak zotrva na svojom a trafi vrati 1 inak 0
-    // true
-    public int pocetDveriNaOtvorenie(int pocetDveri) {
-        int pocetDveriNaOtvorenieModerator;
-        if (auto == hrac) {
-            pocetDveriNaOtvorenieModerator = pocetDveri - 1;
-        } else {
-            pocetDveriNaOtvorenieModerator = pocetDveri - 2;
-        }
-        return pocetDveriNaOtvorenieModerator;
-    }
-
+    //3  
+//    public int pocetDveriNaOtvorenie(int pocetDveri) {
+//        int pocetDveriNaOtvorenieModerator;
+//        if (auto == hrac) {
+//            pocetDveriNaOtvorenieModerator = pocetDveri - 1;
+//        } else {
+//            pocetDveriNaOtvorenieModerator = pocetDveri - 2;
+//        }
+//        return pocetDveriNaOtvorenieModerator;
+//    }
     public void otvorVolneDvereModerator() {
         // moderatorovi pridelim dvere ktore moze otvorit nie je tam auto ani volba hraca
-        int[] dvereModerator = new int[pocetDveriNaOtvorenie(pocetDveri)];
-
-        for (int i = 0; i < pocetDveri; i++) {
+        //int dvereModerator[];
+        if (auto == hrac) {
+            int[] dvereModerator = new int[pocetDveri - 1];
             int pom = 0;
-            if (dvere[i] == false && i != hrac && i != moderator) {
-                dvereModerator[pom] = i;
-                pom++;
+            int pom2;
+
+            for (int i = 0; i < dvere.length; i++) {
+
+                if (dvere[i] == false && i != hrac) {
+                    dvereModerator[pom] = i;
+                    pom++;
+                }
             }
-            int pom2 = generatorModerator.nextInt(dvereModerator.length);
-            moderator = dvereModerator[pom2];
+            if (dvereModerator.length == 1) {
+                pom2 = 0;
+                moderator = dvereModerator[pom2];
+            } else {
+                pom2 = generatorModerator.nextInt(dvereModerator.length);
+                moderator = dvereModerator[pom2];
+            }
+        } else {
+            int[] dvereModerator = new int[pocetDveri - 2];
+            int pom = 0;
+            int pom2;
+
+            for (int i = 0; i < dvere.length; i++) {
+
+                if (dvere[i] == false && i != hrac) {
+                    dvereModerator[pom] = i;
+                    pom++;
+                }
+            }
+            if (dvereModerator.length == 1) {
+                pom2 = 0;
+                moderator = dvereModerator[pom2];
+            } else {
+                pom2 = generatorModerator.nextInt(dvereModerator.length);
+                moderator = dvereModerator[pom2];
+            }
         }
+
     }
 
     public void zmenaDveriHraca() {
         // tu si bude vyberat druhe dvere hrac
-        otvorVolneDvereModerator();
-        int[] dvereHrac = new int[pocetDveriNaOtvorenie(pocetDveri)];
+        // otvorVolneDvereModerator();
+        int[] dvereHrac = new int[pocetDveri - 2];
+        int pom = 0;
+        int pom2;
 
         for (int i = 0; i < pocetDveri; i++) {
-            int pom = 0;
+
             if (i != hrac && i != moderator) {
                 dvereHrac[pom] = i;
                 pom++;
             }
-            int pom2 = generatorHrac.nextInt(dvereHrac.length);
+
+        }
+        if (dvereHrac.length == 1) {
+            pom2 = 0;
+            hrac = dvereHrac[pom2];
+        } else {
+            pom2 = generatorHrac2.nextInt(dvereHrac.length);
             hrac = dvereHrac[pom2];
         }
 
     }
 
     public int urobStrategiuA() {
-     //  otvorVolneDvereModerator();
-        int vyhral = 20;
+        int vyhral = Integer.MAX_VALUE;
 
         if (auto == hrac) {
             vyhral = 1;
         } else {
             vyhral = 0;
         }
-        
-        System.out.println("strategiaA: CisloA: "+auto+" CisloH: "+hrac+" CisloM: " +moderator+" Vyhral?: "+vyhral);
+
+        System.out.println("strategiaA: CisloA: " + auto + " CisloH: " + hrac + " CisloM: " + moderator + " Vyhral?: " + vyhral);
+        if (moderator == hrac) {
+            //   System.out.println("--------------------------WARNIIIIIIIIIIIIIIIIIIIIIIIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGG--------------------------------");
+
+        }
         return vyhral;
     }
 
     // ak zmeni a trafi vrati 1 inak 0
     // false
     public int urobStrategiuB() {
-        int vyhral = 20;
-     //   otvorVolneDvereModerator();
+        int vyhral = Integer.MAX_VALUE;
         zmenaDveriHraca();
-
         if (auto == hrac) {
             vyhral = 1;
         } else {
             vyhral = 0;
         }
-        System.out.println("strategiaB: CisloA: "+auto+" CisloH: "+hrac+" CisloM: " +moderator+" Vyhral?: "+vyhral);
+        System.out.println("strategiaB: CisloA: " + auto + " CisloH: " + hrac + " CisloM: " + moderator + " Vyhral?: " + vyhral);
         return vyhral;
     }
 
-//    public void zacniHru(){
-//          nastavAutoZviera();
-//          if (strategia) {
-//            urobStrategiuA();
-//        } else {
-//              urobStrategiuB();
-//        }
-//          
-//    }
+    public void urobHru() {
+        nastavAutoZviera();
+        otvorVolneDvereModerator();
+        urobStrategiuA();
+        urobStrategiuB();
+    }
+
     public void vymazDvere() {
         dvere = new boolean[pocetDveri];
     }
