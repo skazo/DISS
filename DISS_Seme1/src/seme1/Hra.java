@@ -24,14 +24,16 @@ public class Hra {
     private int hrac;
     private int moderator;
     private int aktualneCisloHry;
+    private boolean typHry;  // true a / false b
 
-    public Hra(int pocetDveri) {
+    public Hra(int pocetDveri, boolean typHry) {
         this.pocetDveri = pocetDveri;
         this.dvere = new boolean[pocetDveri];
         this.auto = -1;
         this.hrac = -1;
         this.moderator = -1;
         this.aktualneCisloHry = 1;
+        this.typHry = typHry;
         generujNasady();
 
     }
@@ -47,7 +49,7 @@ public class Hra {
 
     // 2
     public void nastavAutoZviera() {
-        System.out.println("cislo hry: " + aktualneCisloHry);
+      System.out.println("cislo hry: " + getAktualneCisloHry());
         for (int i = 0; i < pocetDveri; i++) {
             //System.out.println("cislo dveri: " + i);
             dvere[i] = false;
@@ -144,19 +146,14 @@ public class Hra {
     }
 
     public int urobStrategiuA() {
-        int vyhral = Integer.MAX_VALUE;
+        int vyhral;
 
         if (auto == hrac) {
             vyhral = 1;
         } else {
             vyhral = 0;
         }
-
-        System.out.println("strategiaA: CisloA: " + auto + " CisloH: " + hrac + " CisloM: " + moderator + " Vyhral?: " + vyhral);
-        if (moderator == hrac) {
-//               System.out.println("--------------------------WARNIIIIIIIIIIIIIIIIIIIIIIIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGG--------------------------------");
-
-        }
+   System.out.println("strategiaA: CisloA: " + auto + " CisloH: " + hrac + " CisloM: " + moderator + " Vyhral?: " + vyhral);
         return vyhral;
     }
 
@@ -174,14 +171,20 @@ public class Hra {
         return vyhral;
     }
 
-    public void urobHru() {
+    public int urobHru() {
+        int nieco = 0;
         nastavAutoZviera();
         otvorVolneDvereModerator();
-        urobStrategiuA();
-        urobStrategiuB();
+        if (typHry) {
+           nieco = urobStrategiuA();
+        } else {
+        nieco = urobStrategiuB();
+        }
         aktualneCisloHry=getAktualneCisloHry();
         aktualneCisloHry++;
-        setAktualneCisloHry(aktualneCisloHry);
+        //setAktualneCisloHry(aktualneCisloHry);
+        
+        return nieco;
     }
 
     public void vymazDvere() {

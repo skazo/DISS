@@ -17,10 +17,13 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-      // tu bude GUIko 
-     //Hra hra = new Hra(10,true);
-     Jadro jadro = new Jadro(1000000);
-        jadro.simuluj();
+     
+//   simulacia pre strategiu A
+          Jadro jadro1 = new Jadro(1000000,true);
+        jadro1.simuluj();
+ //   simulacia pre strategiu B       
+//     Jadro jadro2 = new Jadro(1000000,false);
+//        jadro2.simuluj();   
        
     }
     

@@ -17,14 +17,16 @@ public abstract class MonteCarlo {
         this.pocetReplikacii = pocetReplikacii;
     }
 
-    public void simuluj() {
-        predSimulaciou();
+      
+     public void simuluj() {
+      predSimulaciou();
         for (int i = 0; i < pocetReplikacii; i++) {
             predReplikaciou();
             replikacia();
             poReplikacii();
         }
         poSimulacii();
+    
     }
 
     public void replikacia() {

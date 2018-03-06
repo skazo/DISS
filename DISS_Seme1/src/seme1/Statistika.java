@@ -17,7 +17,7 @@ public class Statistika {
     private boolean typStrategie;   // stretegiaA = true - stetegiaB = false
     // private final int pocetPreskoc;
 
-    public Statistika(int replikacie, int pocetPreskoc, boolean typStrategie) {
+    public Statistika(int replikacie, boolean typStrategie) {
         this.vysledok = 0;
         this.aktualnaReplikacia = 0;
         this.vsetkyReplikacie = replikacie;
