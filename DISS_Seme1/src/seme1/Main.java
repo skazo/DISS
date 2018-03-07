@@ -19,11 +19,11 @@ public class Main {
         // TODO code application logic here
      
 //   simulacia pre strategiu A
-          Jadro jadro1 = new Jadro(1000000,true);
-        jadro1.simuluj();
+//          Jadro jadro1 = new Jadro(1000000,true);
+//        jadro1.simuluj();
  //   simulacia pre strategiu B       
-//     Jadro jadro2 = new Jadro(1000000,false);
-//        jadro2.simuluj();   
+     Jadro jadro2 = new Jadro(1000000, 3, true);
+        jadro2.simuluj();   
        
     }
     

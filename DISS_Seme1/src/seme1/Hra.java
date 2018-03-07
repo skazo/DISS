@@ -9,8 +9,7 @@ import java.util.Random;
 
 /**
  *
- * @author Michal - odohrava sa tu hra - generovanie nasad, vytvori sa pole,
- * naplni sa, hra sa podla strategie A a B
+ * @author Michal
  */
 public class Hra {
 
@@ -49,7 +48,7 @@ public class Hra {
 
     // 2
     public void nastavAutoZviera() {
-      System.out.println("cislo hry: " + getAktualneCisloHry());
+     // System.out.println("cislo hry: " + getAktualneCisloHry());
         for (int i = 0; i < pocetDveri; i++) {
             //System.out.println("cislo dveri: " + i);
             dvere[i] = false;
@@ -153,7 +152,7 @@ public class Hra {
         } else {
             vyhral = 0;
         }
-   System.out.println("strategiaA: CisloA: " + auto + " CisloH: " + hrac + " CisloM: " + moderator + " Vyhral?: " + vyhral);
+ //  System.out.println("strategiaA: CisloA: " + auto + " CisloH: " + hrac + " CisloM: " + moderator + " Vyhral?: " + vyhral);
         return vyhral;
     }
 
@@ -167,7 +166,7 @@ public class Hra {
         } else {
             vyhral = 0;
         }
-        System.out.println("strategiaB: CisloA: " + auto + " CisloH: " + hrac + " CisloM: " + moderator + " Vyhral?: " + vyhral);
+//        System.out.println("strategiaB: CisloA: " + auto + " CisloH: " + hrac + " CisloM: " + moderator + " Vyhral?: " + vyhral);
         return vyhral;
     }
 

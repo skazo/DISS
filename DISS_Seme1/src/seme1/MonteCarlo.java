@@ -5,16 +5,20 @@
  */
 package seme1;
 
+import java.util.Observable;
+
 /**
  *
  * @author Michal
  */
-public abstract class MonteCarlo {
+public abstract class MonteCarlo extends Observable {
 
     private int pocetReplikacii;
+    private boolean stop;
 
     public MonteCarlo(int pocetReplikacii) {
         this.pocetReplikacii = pocetReplikacii;
+        this.stop = false;
     }
 
       
@@ -22,6 +26,9 @@ public abstract class MonteCarlo {
       predSimulaciou();
         for (int i = 0; i < pocetReplikacii; i++) {
             predReplikaciou();
+            if (stop) {
+              break;  
+            } 
             replikacia();
             poReplikacii();
         }
@@ -46,7 +53,7 @@ public abstract class MonteCarlo {
     }
 
     public void poSimulacii() {
-
+            
     }
 
     public int getPocetReplikacii() {
@@ -56,4 +63,14 @@ public abstract class MonteCarlo {
     public void setPocetReplikacii(int pocetReplikacii) {
         this.pocetReplikacii = pocetReplikacii;
     }
+
+    public boolean isStop() {
+        return stop;
+    }
+
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+    
+    
 }

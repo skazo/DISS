@@ -34,13 +34,14 @@ public class Statistika {
     // vrat pocet uspesnych/pocet replikacii danej strategie
     public double vratStatistiku(boolean typStrategie) {
         double uspesnoststrategie = 0;
-        if (typStrategie) {
+        
+        if (this.typStrategie == true) {
             uspesnoststrategie = vysledok / aktualnaReplikacia;
-            System.out.println("Uspesnost strategie A: " + uspesnoststrategie);
+         //   System.out.println("Uspesnost strategie A: " + uspesnoststrategie);
 
         } else {
             uspesnoststrategie = vysledok / aktualnaReplikacia;
-            System.out.println("Uspesnost strategie B: " + uspesnoststrategie);
+        //    System.out.println("Uspesnost strategie B: " + uspesnoststrategie);
         }
 
         return uspesnoststrategie;
