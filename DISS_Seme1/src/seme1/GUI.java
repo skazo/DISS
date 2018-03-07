@@ -45,7 +45,6 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
 
 
     private void vykreslujGrafy() {
-      
         this.datasetA = new XYSeriesCollection();
         this.datasetB = new XYSeriesCollection();
         this.ciaraA = new XYSeries("P(A)");
@@ -64,7 +63,6 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
         vysledok.setDataset(0, datasetA);
         vysledok.mapDatasetToRangeAxis(0, 0);
         
-       
         NumberAxis pravaOs = new NumberAxis("Pravdepodobnost vyhry B");
         pravaOs.setAutoRangeIncludesZero(true);
         vysledok.setRangeAxis(1, pravaOs);
@@ -75,17 +73,15 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
         rozsahHodnot.setAutoRange(true);
         rozsahHodnot = vysledok.getRangeAxis(1);
         rozsahHodnot.setAutoRange(true);
-        
-
+     
         XYLineAndShapeRenderer ciara = new XYLineAndShapeRenderer(true, false);
-        ciara.setSeriesFillPaint(0, Color.GRAY);
+        ciara.setSeriesFillPaint(0, Color.BLUE);
         vysledok.setRenderer(1, ciara);
 
         NumberAxis ciselnaOs = (NumberAxis) vysledok.getRangeAxis(1);
         ciselnaOs.setAutoRangeIncludesZero(false);
         ciselnaOs = (NumberAxis) vysledok.getRangeAxis(0);
         ciselnaOs.setAutoRangeIncludesZero(false);
-
       
         jPanelChart.add(panelGrafu);
         panelGrafu.setSize(600, 365);
@@ -119,12 +115,12 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
         jPVyhraA = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jPVyhraB = new javax.swing.JTextField();
-        stop = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jPreskoc = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jVykresliKazdu = new javax.swing.JTextField();
         start = new javax.swing.JButton();
+        stop = new javax.swing.JButton();
         jPanelChart = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -162,23 +158,16 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
 
         jLabel5.setText("Pravdepodobnost vyhry:");
 
-        jLabel3.setText("P(strategia A)");
+        jLabel3.setText("P(A)=");
 
         jPVyhraA.setText("0");
 
-        jLabel4.setText("P(strategia B)");
+        jLabel4.setText("P( B)=");
 
         jPVyhraB.setText("0");
         jPVyhraB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPVyhraBActionPerformed(evt);
-            }
-        });
-
-        stop.setText("Stop");
-        stop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopActionPerformed(evt);
             }
         });
 
@@ -199,6 +188,13 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
         start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startActionPerformed(evt);
+            }
+        });
+
+        stop.setText("Stop");
+        stop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopActionPerformed(evt);
             }
         });
 
@@ -224,20 +220,18 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
                         .addGap(121, 121, 121))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel6)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPVyhraB, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(29, 29, 29)
-                                    .addComponent(jPVyhraA, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(20, 20, 20)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPVyhraA)
+                                    .addComponent(jPVyhraB)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(107, 107, 107)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -247,11 +241,13 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
                                     .addComponent(jPocetReplikacii, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jStrategiaB, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jStrategiaA))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(stop, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPVyhraA, jPVyhraB});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -265,9 +261,9 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPocetDveri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPreskoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPreskoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,7 +276,7 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
                 .addComponent(jStrategiaB)
                 .addGap(7, 7, 7)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPVyhraA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -288,10 +284,10 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPVyhraB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stop)
-                    .addComponent(start))
+                    .addComponent(start)
+                    .addComponent(stop))
                 .addContainerGap())
         );
 
@@ -379,7 +375,16 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
 
 
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
+        
         this.stopSimulacie();
+        
+        if (jStrategiaA.isSelected()== true && jStrategiaB.isSelected()== false) {
+          jPVyhraB.setText("0");
+        }
+        
+        if (jStrategiaB.isSelected()== true && jStrategiaA.isSelected()== false) {
+          jPVyhraA.setText("0");
+        }
     }//GEN-LAST:event_stopActionPerformed
 
     private void jVykresliKazduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVykresliKazduActionPerformed
@@ -387,15 +392,22 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
     }//GEN-LAST:event_jVykresliKazduActionPerformed
 
     public void stopSimulacie() {
+       
         if (strategiaA != null) {
             strategiaA.setStop(true);
             jPVyhraA.setText(strategiaA.getStatistika().vratStatistiku(jStrategiaA.isSelected()) + "");
         }
+        
+        
 
         if (strategiaB != null) {
             strategiaB.setStop(true);
             jPVyhraB.setText(strategiaB.getStatistika().vratStatistiku(jStrategiaB.isSelected()) + "");
         }
+        
+        
+        
+        
 
     }
 
