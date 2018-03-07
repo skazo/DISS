@@ -35,14 +35,12 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
     private XYSeries ciaraA;
     private XYSeries ciaraB;
     private XYPlot vysledok;
-  
 
     public GUI() {
         initComponents();
         this.setSize(890, 430);
-        
-    }
 
+    }
 
     private void vykreslujGrafy() {
         this.datasetA = new XYSeriesCollection();
@@ -62,7 +60,7 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
         vysledok.setRangeAxis(0, lavaOs);
         vysledok.setDataset(0, datasetA);
         vysledok.mapDatasetToRangeAxis(0, 0);
-        
+
         NumberAxis pravaOs = new NumberAxis("Pravdepodobnost vyhry B");
         pravaOs.setAutoRangeIncludesZero(true);
         vysledok.setRangeAxis(1, pravaOs);
@@ -73,7 +71,7 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
         rozsahHodnot.setAutoRange(true);
         rozsahHodnot = vysledok.getRangeAxis(1);
         rozsahHodnot.setAutoRange(true);
-     
+
         XYLineAndShapeRenderer ciara = new XYLineAndShapeRenderer(true, false);
         ciara.setSeriesFillPaint(0, Color.BLUE);
         vysledok.setRenderer(1, ciara);
@@ -82,7 +80,7 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
         ciselnaOs.setAutoRangeIncludesZero(false);
         ciselnaOs = (NumberAxis) vysledok.getRangeAxis(0);
         ciselnaOs.setAutoRangeIncludesZero(false);
-      
+
         jPanelChart.add(panelGrafu);
         panelGrafu.setSize(600, 365);
         jPanelChart.setVisible(true);
@@ -358,8 +356,10 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
             strategiaA.addObserver(this);
             Thread vlaknoA = new Thread(strategiaA);
             vlaknoA.start();
-
+            
         }
+        
+        
 
         if (jStrategiaB.isSelected()) {
             strategiaB = new Jadro(Integer.parseInt(jPocetReplikacii.getText()), Integer.parseInt(jPocetDveri.getText()), false);
@@ -368,6 +368,7 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
             vlaknoB.start();
         }
 
+      
         Thread vlakno = new Thread(this);
         vlakno.start();
 
@@ -375,15 +376,15 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
 
 
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
-        
+
         this.stopSimulacie();
-        
-        if (jStrategiaA.isSelected()== true && jStrategiaB.isSelected()== false) {
-          jPVyhraB.setText("0");
+
+        if (jStrategiaA.isSelected() == true && jStrategiaB.isSelected() == false) {
+            jPVyhraB.setText("0");
         }
-        
-        if (jStrategiaB.isSelected()== true && jStrategiaA.isSelected()== false) {
-          jPVyhraA.setText("0");
+
+        if (jStrategiaB.isSelected() == true && jStrategiaA.isSelected() == false) {
+            jPVyhraA.setText("0");
         }
     }//GEN-LAST:event_stopActionPerformed
 
@@ -392,22 +393,16 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
     }//GEN-LAST:event_jVykresliKazduActionPerformed
 
     public void stopSimulacie() {
-       
+
         if (strategiaA != null) {
             strategiaA.setStop(true);
             jPVyhraA.setText(strategiaA.getStatistika().vratStatistiku(jStrategiaA.isSelected()) + "");
         }
-        
-        
 
         if (strategiaB != null) {
             strategiaB.setStop(true);
             jPVyhraB.setText(strategiaB.getStatistika().vratStatistiku(jStrategiaB.isSelected()) + "");
         }
-        
-        
-        
-        
 
     }
 
@@ -475,20 +470,19 @@ public class GUI extends javax.swing.JFrame implements Observer, Runnable {
     public void update(Observable o, Object arg) {
         int pocetPreskocit = 0;
         Statistika x = (Statistika) arg;
-        
+
         if (x.isTypStrategie()) {
             jPVyhraA.setText(x.vratStatistiku(true) + "");
         } else {
             jPVyhraB.setText(x.vratStatistiku(false) + "");
         }
-        
+
         if (jPreskoc.getText().equals("")) {
-           pocetPreskocit = 0;
-        } else{
-           pocetPreskocit = Integer.parseInt(jPreskoc.getText());
-        }            
-            
-        
+            pocetPreskocit = 0;
+        } else {
+            pocetPreskocit = Integer.parseInt(jPreskoc.getText());
+        }
+
         if ((double) (Integer.parseInt(jPocetReplikacii.getText()) * pocetPreskocit / 100) >= x.getAktualnaReplikacia()) {
             return;
         }
